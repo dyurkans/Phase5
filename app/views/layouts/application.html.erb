@@ -11,10 +11,10 @@
     <div class="container">
       <div id="login">
         <% if logged_in? %>
-          <%= link_to 'Logout', logout_path %>
-          <br>[<%= current_user.proper_name %>:<%= current_user.role %>]
+          <%= link_to 'Logout', logout_path, :class => 'btn btn-primary' %>
+          <br>[<%= current_user.student.proper_name %>:<%= current_user.role %>]
         <% else %>
-         <%= link_to 'Login', login_path %>
+         <%= link_to 'Log In', login_path, :class => 'btn btn-primary' %>
         <% end %>
       </div>
     <!-- TITLE BAR -->
