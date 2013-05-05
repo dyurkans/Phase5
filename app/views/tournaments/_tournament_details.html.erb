@@ -1,0 +1,49 @@
+<p>
+	<b>Tournament:</b> <%= @tournament.name %>
+</p>
+
+<P>
+	<b>Date:</b> <%= @tournament.date.strftime(" %A, %B %d, %Y") %>
+</p>
+
+<p>
+  <b>Ranks:</b> 
+  <%= rank_range_for(@tournament) %>
+</p>
+
+
+<p>
+  <b>Active:</b> <%= @tournament.active ? "Yes" : "No" %>
+</p>
+
+<br></br>
+<h3>Tournament Events</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Event</th>
+	  <th>Rank(s)</th>
+  	  <th>Age(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tournament_sections.each do |section| %>
+      <tr>
+        <td><%= link_to section.event.name, section_path(section) %></td>
+        <td>
+          <%= rank_range_for(section) %>
+        </td>
+        <td>
+          <%= age_range_for(section) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @tournament_sections %>
+  </div>
+  <%= will_paginate @tournament_sections, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>

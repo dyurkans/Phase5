@@ -1,0 +1,32 @@
+<% if @tournament_students.empty? %>
+  <p>&nbsp;&nbsp;<em>None at this time</em></p>
+  <p>&nbsp;</p>
+  
+<% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+  			<th>Rank</th>
+  			<th>Age</th>
+  			<th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tournament_students.each do |student| %>
+        <tr>
+          <td><%= link_to student.name, student_path(student) %></td>
+          <td><%= rank_name(student.rank)  %></td>
+          <td class="centered"><%= student.age %></td>
+          <td><%= link_to raw("<i class='icon-remove'></i>"), :method => 'delete', :confirm => 'Are you sure?' %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @tournament_students %>
+  </div>
+  <%= will_paginate @tournament_students, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>

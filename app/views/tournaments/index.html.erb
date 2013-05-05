@@ -3,14 +3,16 @@
 	  <% if @tournaments.nil? %>
 	    <p><em>No tournaments currently in the system.</em></p>
 	  <% else %>
-		  <h3>List of tournaments</h3>
+		  <h3>List of Tournaments</h3>
 		  <table class="table table-striped">
         <thead>
           <tr>
             <th width="250">Name</th>
-      			<th class="centered">Ages</th>
             <th class="centered">Ranks</th>
+            <th class="centered">Date</th>
+            <th class="centered">Registrants</th>
             <th class="centered">Active</th>            
+            <th class="centered">&nbsp;</th>
             <th class="centered">&nbsp;</th>
           </tr>
         </thead>
@@ -18,16 +20,19 @@
           <% @tournaments.each do |tournament| %>
             <tr>
               <td><%= link_to tournament.name, tournament_path(tournament) %></td>
-              <td>
-                <%= rank_range_for(section) %>
+              <td width="100">
+                <%= tournament.date.strftime("%B %d, %Y") %>
               </td>
               <td>
-               <%= age_range_for(section) %>
-              </td>
+                <%= rank_range_for(tournament) %>
+              </td>              
+              <td class="centered"><%= tournament.students.count %>
               <td class="centered"><%= tournament.active ? "Yes" : "No" %></td>
-      				<td class="centered">
+      				<td width="100">
                 <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_tournament_path(tournament), :class => 'btn btn-mini' %>
                 &nbsp;
+              </td>
+              <td width="100">
                 <%= link_to raw("<i class='icon-remove icon-white'></i> Destroy"), tournament_path(tournament), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
               </td>
             </tr>
@@ -35,5 +40,6 @@
         </tbody>
       </table>
 		<% end %>
+    <%= link_to raw("<i class='icon-plus icon-white'></i> Add a Tournament"), new_tournament_path, :class => 'btn btn-primary', :id => 'Create Tournament' %>
 	</div>
 </div>

@@ -1,48 +1,53 @@
 class TournamentsController < ApplicationController
 
   def index
-    @events = Tournament.alphabetical.paginate(:page => params[:page]).per_page(8)
-    @inactive_events = Tournament.inactive.alphabetical.paginate(:page => params[:page]).per_page(8)
+    @tournaments = Tournament.alphabetical.paginate(:page => params[:page]).per_page(8)
+    @inactive_tournaments= Tournament.inactive.alphabetical.paginate(:page => params[:page]).per_page(8)
+
   end
 
   def show
-    @Tournament = Tournament.find(params[:id])
+    @tournament = Tournament.find(params[:id])
+    @tournament_students = @tournament.students.alphabetical.paginate(:page => params[:page]).per_page(8)
+    @tournament_sections = @tournament.sections.alphabetical.paginate(:page => params[:page]).per_page(8)
   end
   
   def new
-    @Tournament = Tournament.new
+    @tournament = Tournament.new
   end
 
   def edit
-    @Tournament = Tournament.find(params[:id])
+    @tournament = Tournament.find(params[:id])
   end
 
   def create
-    @Tournament = Tournament.new(params[:Tournament])
-    if @Tournament.save
+    @tournament = Tournament.new(params[:tournament])
+    if @tournament.save
       # if saved to database
-      flash[:notice] = "Successfully created #{@Tournament.name}."
-      redirect_to @Tournament # go to show Tournament page
+      flash[:notice] = "Successfully created #{@tournament.name}."
+      redirect_to @tournament # go to show Tournament page
     else
       # return to the 'new' form
+      flash[:notice] = "Unable to create #{@tournament.name}."
       render :action => 'new'
     end
   end
 
   def update
-    @Tournament = Tournament.find(params[:id])
-    if @Tournament.update_attributes(params[:Tournament])
-      flash[:notice] = "Successfully updated #{@Tournament.name}."
-      redirect_to @Tournament
+    @tournament = Tournament.find(params[:id])
+    if @tournament.update_attributes(params[:tournament])
+      flash[:notice] = "Successfully updated #{@tournament.name}."
+      redirect_to @tournament
     else
+   	  flash[:notice] = "Unable to update #{@tournament.name}."
       render :action => 'edit'
     end
   end
 
   def destroy
-    @Tournament = Tournament.find(params[:id])
-    @Tournament.destroy
-    flash[:notice] = "Successfully removed #{@Tournament.name} from karate tournament system"
-    redirect_to events_url
+    @tournament = Tournament.find(params[:id])
+    @tournament.destroy
+    flash[:notice] = "Successfully removed #{@tournament.name} from karate tournament system"
+    redirect_to tournaments_url
   end
 end
