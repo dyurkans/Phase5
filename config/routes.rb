@@ -14,6 +14,7 @@ Karate67272::Application.routes.draw do
   resources :sections
   resources :students
   resources :tournaments
+  resources :dojos
   
   # Semi-static page routes
   match 'home' => 'home#index', :as => :home

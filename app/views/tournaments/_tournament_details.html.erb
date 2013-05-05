@@ -45,5 +45,5 @@
   <div clas="page_info">
     <%= page_entries_info @tournament_sections %>
   </div>
-  <%= will_paginate @tournament_sections, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+  <%= will_paginate @tournament_sections, :param_name => 'tourney_section_page', :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
 </div>

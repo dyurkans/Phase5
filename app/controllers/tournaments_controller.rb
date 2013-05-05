@@ -1,15 +1,15 @@
 class TournamentsController < ApplicationController
 
   def index
-    @tournaments = Tournament.alphabetical.paginate(:page => params[:page]).per_page(8)
-    @inactive_tournaments= Tournament.inactive.alphabetical.paginate(:page => params[:page]).per_page(8)
+    @tournaments = Tournament.alphabetical.paginate(:page => params[:active_tourney_page]).per_page(8)
+    @inactive_tournaments= Tournament.inactive.alphabetical.paginate(:page => params[:inactive_tourney_page]).per_page(8)
 
   end
 
   def show
     @tournament = Tournament.find(params[:id])
-    @tournament_students = @tournament.students.alphabetical.paginate(:page => params[:page]).per_page(8)
-    @tournament_sections = @tournament.sections.alphabetical.paginate(:page => params[:page]).per_page(8)
+    @tournament_students = @tournament.students.alphabetical.paginate(:page => params[:tourney_student_page]).per_page(8)
+    @tournament_sections = @tournament.sections.alphabetical.paginate(:page => params[:tourney_section_page]).per_page(8)
   end
   
   def new
