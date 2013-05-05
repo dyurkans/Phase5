@@ -9,6 +9,14 @@
 <body>
   <div class="wrapper">
     <div class="container">
+      <div id="login">
+        <% if logged_in? %>
+          <%= link_to 'Logout', logout_path %>
+          <br>[<%= current_user.proper_name %>:<%= current_user.role %>]
+        <% else %>
+         <%= link_to 'Login', login_path %>
+        <% end %>
+      </div>
     <!-- TITLE BAR -->
   	<%= link_to(image_tag('amk_titlebar.png'), home_path) %>
   	<!-- NAV BAR -->
