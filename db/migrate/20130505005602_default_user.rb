@@ -5,6 +5,7 @@ class DefaultUser < ActiveRecord::Migration
     admin.password = "secret"
     admin.password_confirmation = "secret"
     admin.role = "admin"
+    admin.student_id = 631
     admin.save!
   end
 
