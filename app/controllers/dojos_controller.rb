@@ -7,6 +7,7 @@ class DojosController < ApplicationController
 
   def show
     @dojo = Dojo.find(params[:id])
+    @dojo_students = @dojo.students.active.alphabetical.paginate(:page => params[:dojo_student_page]).per_page(8)
   end
   
   def new
