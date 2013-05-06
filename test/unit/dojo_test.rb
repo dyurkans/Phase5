@@ -76,6 +76,11 @@ class DojoTest < ActiveSupport::TestCase
       bad_dojo = FactoryGirl.build(:dojo, name: "Bad Dojo", street: "Qo'noS", city: "Qo'noS", state: "PA", zip: "00001")
       deny bad_dojo.valid?, "#{bad_dojo.to_yaml}"
     end
+
+    should "provide full address in one string" do
+      assert_equal "5000 Forbes Avenue, Pittsburgh, PA 15213", @cmu.full_address
+    end
+
     
     # should "delete dojos that have never had students assigned" do
     #   uif = FactoryGirl.create(:dojo, name: "UIF", street: "801 Union Place", city:"Pittsburgh", zip: "15212")

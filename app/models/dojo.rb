@@ -27,6 +27,10 @@ class Dojo < ActiveRecord::Base
   def current_students
     self.students.alphabetical.select{|s| s.current_dojo == self}.uniq
   end
+
+  def full_address
+    "#{street}, #{city}, #{state} #{zip}"
+  end
   
   # Callbacks
   before_destroy :check_if_destroyable
