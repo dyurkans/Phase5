@@ -5,12 +5,12 @@ class DefaultUser < ActiveRecord::Migration
     admin.password = "secret"
     admin.password_confirmation = "secret"
     admin.role = "admin"
-    admin.student_id = 631
+    admin.student_id = 800
     admin.save!
   end
 
   def down
-    admin = User.find_by_email "admin@example.com"
+    admin = User.find_by_email "proh@cmu.com"
     User.delete admin
   end
 end
