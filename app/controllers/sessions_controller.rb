@@ -4,19 +4,20 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:login], params[:password])
+    user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      redirect_to home_path, :notice => "Logged in successfully."
+      redirect_to home_path, :alert => "You are logged into karate tournament system."
     else
-      flash.now[:alert] = "Invalid login or password."
+      flash.now[:alert] = "Email or password is invalid."
       render :action => 'new'
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to home_path, :notice => "You have been logged out."
+    flash.now[:alert] = "You have been logged out."
+    redirect_to home_path
   end
   
 end
